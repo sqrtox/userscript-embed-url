@@ -1,0 +1,22 @@
+{
+  "cSpell.words": [
+    "darkgreen",
+    "esbuild",
+    "greasemonkey",
+    "greasyfork",
+    "imgur",
+    "linebreak",
+    "nicovideo",
+    "noopener",
+    "noreferrer",
+    "outfile",
+    "sqrtox",
+    "toolbelt",
+    "userscript",
+    "youtu"
+  ],
+  "editor.tabSize": 2,
+  "editor.codeActionsOnSave": {
+    "source.fixAll": true
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "name": "userscript-embed-url",
+  "version": "1.0.0",
+  "description": "A user script that adds a corresponding embed such as an image or video to a URL.",
+  "scripts": {
+    "prebuild": "rimraf dist",
+    "build": "node -r esbuild-register scripts/build.ts",
+    "watch": "nodemon"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sqrtox/userscript-embed-url.git"
+  },
+  "keywords": [
+    "userscript"
+  ],
+  "author": "sqrtox",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/sqrtox/userscript-embed-url/issues"
+  },
+  "homepage": "https://github.com/sqrtox/userscript-embed-url#readme",
+  "devDependencies": {
+    "@types/greasemonkey": "^4.0.4",
+    "@types/node": "^18.11.18",
+    "@typescript-eslint/eslint-plugin": "^5.47.1",
+    "@typescript-eslint/parser": "^5.47.1",
+    "esbuild": "^0.16.12",
+    "esbuild-register": "^3.4.2",
+    "eslint": "^8.30.0",
+    "file-type": "^18.0.0",
+    "nodemon": "^2.0.20",
+    "rimraf": "^3.0.2",
+    "ts-toolbelt": "^9.6.0",
+    "typescript": "^4.9.4",
+    "userscript-metadata": "^1.1.0"
+  },
+  "dependencies": {
+    "change-case": "^4.1.2"
+  }
+}
