@@ -12,7 +12,7 @@ import { dedupeTslib } from '~/esbuild-plugins/dedupeTslib';
     'description:ja': 'URLに画像や動画などの対応する埋め込みを追加するユーザースクリプトです。',
     version: pkg.version,
     icon: await readIcon('./src/assets/icon.png'),
-    match: 'https://example.com',
+    match: '*://*/*',
     connect: [
       'imgur.com',
       'i.imgur.com',
