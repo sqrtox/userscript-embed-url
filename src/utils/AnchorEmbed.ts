@@ -2,6 +2,9 @@ import { type Object } from 'ts-toolbelt';
 import { objectKeys } from './objectKeys';
 import { observeAnchor, ObserveAnchorRecordTypes } from './observeAnchor';
 import { findElement } from './findElement';
+import { isSameSite } from './isSameSite';
+
+const MAX_REOLVE_TIMES = 10;
 
 export type AnchorEmbedRuleTest = AnchorEmbedRule['test']
 
@@ -84,24 +87,29 @@ export class AnchorEmbed {
   }
 
   #resolve(url: URL): URL {
-    const resolvers = this.#resolvers.filter(v => (
-      this.constructor.#testFilter(url, v)
-    ));
+    let resolveTimes = 0;
+    let resolvers: AnchorEmbedResolver[] | undefined;
+    let current = url;
 
-    if (!resolvers.length) {
-      return url;
-    }
+    do {
+      resolvers = this.#resolvers.filter(v => this.constructor.#testFilter(current, v));
 
-    let current = resolvers[0].effect(url) ?? url;
-    const len = resolvers.length;
+      if (resolvers.length > 0 && resolveTimes >= MAX_REOLVE_TIMES) {
+        console.warn('[WARN] Stopped resolve with ', resolvers);
 
-    for (let i = 1; i < len; i++) {
-      const resolved = resolvers[i].effect(current);
-
-      if (resolved) {
-        current = resolved;
+        break;
       }
-    }
+
+      for (const resolver of resolvers) {
+        const resolved = resolver.effect(current);
+
+        if (resolved) {
+          current = resolved;
+        }
+      }
+
+      resolveTimes++;
+    } while (resolvers?.length > 0);
 
     return current;
   }
@@ -128,6 +136,11 @@ export class AnchorEmbed {
     }
 
     const url = this.#resolve(new URL(asHref));
+
+    if (isSameSite(url, new URL(location.href))) {
+      return;
+    }
+
     const appliedRulesMap = this.#appliedRulesMap;
 
     for (const rule of this.#rules) {

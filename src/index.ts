@@ -4,6 +4,7 @@ import feederJumpPageResolver from '~/resolvers/feeder-jump-page';
 import youtubeRule from '~/rules/youtube';
 import nicovideoRule from '~/rules/nicovideo';
 import twitterRule from '~/rules/twitter';
+import xToTwitterResolver from '~/resolvers/x-to-twitter';
 
 const anchorEmbed = new AnchorEmbed({
   rules: [
@@ -13,7 +14,8 @@ const anchorEmbed = new AnchorEmbed({
     twitterRule()
   ],
   resolvers: [
-    feederJumpPageResolver()
+    feederJumpPageResolver(),
+    xToTwitterResolver()
   ]
 });
 
