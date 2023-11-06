@@ -22,6 +22,7 @@
   },
   "homepage": "https://github.com/sqrtox/userscript-embed-url#readme",
   "devDependencies": {
+    "@types/facebook-js-sdk": "^3.3.9",
     "@types/greasemonkey": "^4.0.4",
     "@types/node": "^18.11.18",
     "@typescript-eslint/eslint-plugin": "^5.47.1",

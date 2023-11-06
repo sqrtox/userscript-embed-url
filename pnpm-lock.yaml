@@ -13,6 +13,9 @@ dependencies:
     version: 8.0.1
 
 devDependencies:
+  '@types/facebook-js-sdk':
+    specifier: ^3.3.9
+    version: 3.3.9
   '@types/greasemonkey':
     specifier: ^4.0.4
     version: 4.0.6
@@ -344,6 +347,10 @@ packages:
 
   /@tokenizer/token@0.3.0:
     resolution: {integrity: sha512-OvjF+z51L3ov0OyAU0duzsYuvO01PH7x4t6DJx+guahgTnBHkhJdG7soQeTSFLWN3efnHyibZ4Z8l2EuWwJN3A==}
+    dev: true
+
+  /@types/facebook-js-sdk@3.3.9:
+    resolution: {integrity: sha512-uJiJ+ljEPzC7jHGXl8YT7gRUh0fGzzJYrdwyrjgwSqFvrcCwlWMu/nLLcJeIRoFA81uVBwZBOKQIkjXFknXPsA==}
     dev: true
 
   /@types/greasemonkey@4.0.6:
