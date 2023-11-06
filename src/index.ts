@@ -6,6 +6,7 @@ import nicovideoRule from '~/rules/nicovideo';
 import twitterRule from '~/rules/twitter';
 import xToTwitterResolver from '~/resolvers/x-to-twitter';
 import facebookRule from '~/rules/facebook';
+import instagramRule from '~/rules/instagram';
 
 const anchorEmbed = new AnchorEmbed({
   rules: [
@@ -13,7 +14,8 @@ const anchorEmbed = new AnchorEmbed({
     youtubeRule(),
     nicovideoRule(),
     twitterRule(),
-    facebookRule()
+    facebookRule(),
+    instagramRule()
   ],
   resolvers: [
     feederJumpPageResolver(),

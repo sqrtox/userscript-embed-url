@@ -16,7 +16,8 @@ import { dedupeTslib } from '~/esbuild-plugins/dedupeTslib';
     connect: [
       'imgur.com',
       'i.imgur.com',
-      'publish.twitter.com'
+      'publish.twitter.com',
+      'www.instagram.com'
     ],
     namespace: pkg.repository.url.replace(/^git\+|\.git$/g, ''),
     author: pkg.author,
