@@ -1,6 +1,6 @@
 {
   "name": "userscript-embed-url",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "A user script that adds a corresponding embed such as an image or video to a URL.",
   "scripts": {
     "build": "run-s build:*",
