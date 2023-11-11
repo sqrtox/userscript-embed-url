@@ -19,12 +19,10 @@ export default (): AnchorEmbedRule => ({
     pathname: /^\/?pin\/\d+\/?$/
   },
   effect: async ({ target, url, onAbort }) => {
-    const { response, finalUrl } = await exoticFetch(url.href, {
+    const { response } = await exoticFetch(url.href, {
       responseType: 'text'
     });
     const container = document.createElement('div');
-
-    console.log(url.href, response, finalUrl);
 
     const m = response.match(/(i\.pinimg\.com\/.+?\/.+?\/.+?\/.+?\..+?)"/)?.[1];
 
