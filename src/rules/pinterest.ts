@@ -1,43 +1,87 @@
 import { AnchorEmbedRule } from '~/utils/AnchorEmbed';
-import { createElement } from '~/utils/createElement';
-import { createStyles } from '~/utils/createStyles';
-import { exoticFetch } from '~/utils/exoticFetch';
 import { insertAfter } from '~/utils/insertAfter';
 
-const classNames = createStyles({
-  img: {
-    '': {
-      maxWidth: '90%'
+const initPinterestScript = (() => {
+  let initialized = false;
+
+  return () => {
+    if (initialized) {
+      return;
     }
-  }
-});
+
+    const script = document.createElement('script');
+
+    script.type = 'text/javascript';
+    script.async = true;
+    script.src = '//assets.pinterest.com/js/pinit.js';
+
+    document.body.append(script);
+
+    initialized = true;
+  };
+})();
 
 export default (): AnchorEmbedRule => ({
   name: 'Pinterest',
   test: {
-    hostname: /^(?:www|[a-z]{2})\.pinterest\.com$/,
-    pathname: /^\/?pin\/\d+\/?$/
+    hostname: [
+      // www.pinterest.com
+      // jp.pinterest.com
+      /^(?:www|[a-z]{2})\.pinterest\.com$/,
+      // www.pinterest.jp
+      /^www\.pinterest\.[a-z]{2}$/
+    ],
+    pathname: [
+      // https://www.pinterest.jp/pin/nnnnn/
+      /^\/?pin\/\d+\/?$/,
+      // https://www.pinterest.jp/xxxxx/
+      /^\/?[^/]+\/?$/,
+      // https://www.pinterest.jp/xxxxx/xxxxx/
+      /^\/?[^/]+\/[^/]+\/?$/
+    ]
   },
   effect: async ({ target, url, onAbort }) => {
-    const { response } = await exoticFetch(url.href, {
-      responseType: 'text'
-    });
+    initPinterestScript();
+
     const container = document.createElement('div');
+    const a = document.createElement('a');
+    const paths = url.pathname.split('/').filter(v => v);
 
-    const m = response.match(/(i\.pinimg\.com\/.+?\/.+?\/.+?\/.+?\..+?)"/)?.[1];
+    a.href = url.href;
 
-    if (!m) {
+    const reject = (() => {
+      if (paths.length === 1) {
+        a.dataset.pinDo = 'embedUser';
+        a.dataset.pinBoardWidth = '400';
+        a.dataset.pinScaleHeight = '320';
+        a.dataset.pinScaleWidth = '80';
+
+        return false;
+      }
+
+      if (paths.length !== 2) {
+        return true;
+      }
+
+      if (paths[0] === 'pin') {
+        a.dataset.pinDo = 'embedPin';
+
+        return false;
+      } else {
+        a.dataset.pinDo = 'embedBoard';
+        a.dataset.pinBoardWidth = '400';
+        a.dataset.pinScaleHeight = '240';
+        a.dataset.pinScaleWidth = '80';
+
+        return false;
+      }
+    })();
+
+    if (reject) {
       return;
     }
 
-    const img = createElement('img', {
-      attributes: {
-        src: `https://${m}`,
-        className: classNames.img
-      }
-    });
-
-    container.append(img);
+    container.append(a);
 
     insertAfter(target, container);
     onAbort(() => container.remove());
