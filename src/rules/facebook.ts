@@ -41,7 +41,15 @@ export default (): AnchorEmbedRule => ({
   name: 'Facebook',
   test: {
     hostname: /^(?:www|m)\.facebook\.com$/,
-    pathname: /^\/?[^/]+\/(?:posts|videos)(?:\/[^/]+)?\/[^/]+\/?$/
+    pathname: [
+      // https://www.facebook.com/watch/?v=nnnnn
+      /^\/?watch\/?$/,
+      // https://www.facebook.com/xxxxx/videos/nnnnn/
+      // https://www.facebook.com/xxxxx/posts/xxxxx
+      /^\/?[^/]+\/(?:posts|videos)(?:\/[^/]+)?\/[^/]+\/?$/,
+      // https://www.facebook.com/photo/?fbid=nnnnn&set=xxxxx&idorvanity=nnnnn
+      /^\/?photo\/?$/
+    ]
   },
   effect: ctx => {
     initSdk();
