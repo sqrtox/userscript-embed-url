@@ -88,7 +88,6 @@ export default (): AnchorEmbedRule => ({
 
     createSpoiler(ctx, async ({ container, onAbort }) => {
       container.append(a);
-      console.log(unsafeWindow, unsafeWindow[methodName as any])
       unsafeWindow[methodName as keyof typeof unsafeWindow](container);
       onAbort(() => container.replaceChildren())
     });
