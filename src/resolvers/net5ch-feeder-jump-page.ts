@@ -1,7 +1,7 @@
 import type { AnchorEmbedResolver } from "~/utils/AnchorEmbed";
 
 export default (): AnchorEmbedResolver => ({
-  name: "Feeder jump page",
+  name: "5ch jump page",
   test: {
     hostname: /^jump\.5ch\.net$/,
   },
