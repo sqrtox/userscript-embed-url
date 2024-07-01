@@ -1,26 +1,13 @@
 {
-  "name": "userscript-embed-url",
-  "version": "1.3.1",
-  "description": "A user script that adds a corresponding embed such as an image or video to a URL.",
-  "scripts": {
-    "build": "run-s build:*",
-    "build:clean": "rimraf dist",
-    "build:build": "node -r esbuild-register scripts/build.ts",
-    "watch": "nodemon"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/sqrtox/userscript-embed-url.git"
-  },
-  "keywords": [
-    "userscript"
-  ],
   "author": "sqrtox",
-  "license": "MIT",
   "bugs": {
     "url": "https://github.com/sqrtox/userscript-embed-url/issues"
   },
-  "homepage": "https://github.com/sqrtox/userscript-embed-url#readme",
+  "dependencies": {
+    "change-case": "^4.1.2",
+    "parse-domain": "^8.0.1"
+  },
+  "description": "A user script that adds a corresponding embed such as an image or video to a URL.",
   "devDependencies": {
     "@types/facebook-js-sdk": "^3.3.9",
     "@types/greasemonkey": "^4.0.4",
@@ -39,8 +26,21 @@
     "typescript": "^4.9.4",
     "userscript-metadata": "^1.1.0"
   },
-  "dependencies": {
-    "change-case": "^4.1.2",
-    "parse-domain": "^8.0.1"
-  }
+  "homepage": "https://github.com/sqrtox/userscript-embed-url#readme",
+  "keywords": [
+    "userscript"
+  ],
+  "license": "MIT",
+  "name": "userscript-embed-url",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sqrtox/userscript-embed-url.git"
+  },
+  "scripts": {
+    "build": "run-s build:*",
+    "build:clean": "rimraf dist",
+    "build:build": "node -r esbuild-register scripts/build.ts",
+    "watch": "nodemon"
+  },
+  "version": "1.4.0"
 }
